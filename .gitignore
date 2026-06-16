@@ -1,0 +1,27 @@
+# Local browser preview profiles
+.chrome-preview-profile/
+.chrome-preview-profile-*/
+.edge-preview-profile/
+.edge-preview-profile-*/
+
+# Local temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# External downloaded/reference folders
+garden-skills-main/
+
+# Dependencies, caches, and build outputs
+node_modules/
+.cache/
+dist/
+build/
+coverage/
+*.log
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/

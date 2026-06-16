@@ -1,0 +1,1122 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>黃稚淯 | Frontend Resume</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6efe3;
+      --bg-soft: #efe0cd;
+      --surface: rgba(255, 251, 244, 0.86);
+      --surface-solid: #fffaf2;
+      --ink: #2f261f;
+      --muted: #75685d;
+      --line: rgba(104, 82, 62, 0.18);
+      --tea: #b8845d;
+      --tea-dark: #7c583b;
+      --cream: #fff7ec;
+      --sage: #70836d;
+      --sage-dark: #52644f;
+      --rose: #b66f67;
+      --shadow: 0 28px 70px rgba(98, 71, 43, 0.18);
+      --soft-shadow: 0 14px 36px rgba(98, 71, 43, 0.12);
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --max: 1160px;
+      --ease: cubic-bezier(.22, 1, .36, 1);
+    }
+
+    [data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #201913;
+      --bg-soft: #30241a;
+      --surface: rgba(49, 38, 29, 0.88);
+      --surface-solid: #33271d;
+      --ink: #f8ead8;
+      --muted: #c8b6a1;
+      --line: rgba(242, 219, 190, 0.18);
+      --tea: #d0a172;
+      --tea-dark: #f0c892;
+      --cream: #3a2c20;
+      --sage: #a9bc9d;
+      --sage-dark: #d7e4c8;
+      --rose: #dfa097;
+      --shadow: 0 32px 84px rgba(0, 0, 0, 0.34);
+      --soft-shadow: 0 18px 44px rgba(0, 0, 0, 0.28);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", "Yu Gothic", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.68), transparent 34rem),
+        linear-gradient(135deg, var(--bg), var(--bg-soft));
+      color: var(--ink);
+      transition: background-color 420ms var(--ease), color 420ms var(--ease);
+      text-wrap: pretty;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(124, 88, 59, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124, 88, 59, 0.035) 1px, transparent 1px);
+      background-size: 34px 34px;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, .76), transparent 82%);
+    }
+
+    button {
+      font: inherit;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page {
+      width: min(100%, var(--max));
+      margin: 0 auto;
+      padding: 28px 22px 64px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 14px;
+      z-index: 20;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-bottom: 22px;
+      pointer-events: none;
+    }
+
+    .control {
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--ink);
+      background: color-mix(in srgb, var(--surface-solid) 78%, transparent);
+      box-shadow: var(--soft-shadow);
+      backdrop-filter: blur(18px);
+      cursor: pointer;
+      pointer-events: auto;
+      transition: transform 220ms var(--ease), border-color 220ms var(--ease), background 220ms var(--ease);
+    }
+
+    .control:hover {
+      transform: translateY(-2px);
+      border-color: color-mix(in srgb, var(--tea) 55%, var(--line));
+    }
+
+    .control:focus-visible {
+      outline: 3px solid color-mix(in srgb, var(--tea) 38%, transparent);
+      outline-offset: 3px;
+    }
+
+    .control-mark {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: inline-block;
+      flex: 0 0 auto;
+      background:
+        linear-gradient(90deg, transparent 49%, var(--surface-solid) 50%),
+        var(--tea);
+      border: 1px solid color-mix(in srgb, var(--tea-dark) 55%, transparent);
+      transition: transform 420ms var(--ease), background 420ms var(--ease);
+    }
+
+    [data-theme="dark"] .control-mark {
+      transform: rotate(180deg);
+      background:
+        radial-gradient(circle at 65% 34%, var(--surface-solid) 0 28%, transparent 29%),
+        var(--tea-dark);
+    }
+
+    .language-mark {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: inline-grid;
+      place-items: center;
+      color: var(--cream);
+      background: linear-gradient(135deg, var(--sage), var(--tea));
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .shell {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(24px);
+      overflow: hidden;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(280px, 36%) 1fr;
+      min-height: 500px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .profile-panel {
+      position: relative;
+      padding: 40px;
+      color: var(--cream);
+      background:
+        linear-gradient(160deg, rgba(95, 108, 83, .9), rgba(123, 86, 58, .94)),
+        linear-gradient(135deg, var(--sage), var(--tea-dark));
+      overflow: hidden;
+    }
+
+    .profile-panel::before,
+    .profile-panel::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(255, 247, 236, 0.2);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .profile-panel::before {
+      width: 260px;
+      height: 260px;
+      right: -92px;
+      top: -74px;
+    }
+
+    .profile-panel::after {
+      width: 180px;
+      height: 180px;
+      left: -90px;
+      bottom: 36px;
+    }
+
+    .portrait-wrap {
+      position: relative;
+      width: 168px;
+      margin-bottom: 30px;
+    }
+
+    .portrait-wrap::before {
+      content: "";
+      position: absolute;
+      inset: -10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 247, 236, 0.42);
+    }
+
+    .portrait {
+      position: relative;
+      width: 168px;
+      height: 168px;
+      border-radius: 50%;
+      display: block;
+      object-fit: cover;
+      object-position: 50% 27%;
+      border: 5px solid rgba(255, 247, 236, 0.74);
+      box-shadow: 0 18px 38px rgba(42, 31, 22, 0.28);
+      background: var(--cream);
+    }
+
+    .name {
+      position: relative;
+      margin: 0;
+      font-size: clamp(2.25rem, 5vw, 4.75rem);
+      line-height: 0.98;
+      letter-spacing: 0;
+      font-weight: 900;
+    }
+
+    .subtitle {
+      position: relative;
+      margin: 18px 0 0;
+      font-size: 1.02rem;
+      line-height: 1.8;
+      color: rgba(255, 247, 236, 0.86);
+    }
+
+    .meta-list {
+      position: relative;
+      display: grid;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: rgba(255, 247, 236, 0.92);
+      line-height: 1.6;
+    }
+
+    .mini-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 auto;
+      background: rgba(255, 247, 236, 0.16);
+      border: 1px solid rgba(255, 247, 236, 0.18);
+    }
+
+    .mini-icon svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .hero-main {
+      padding: 52px clamp(28px, 5vw, 62px);
+      display: grid;
+      align-content: center;
+      gap: 30px;
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--surface-solid) 50%, transparent), transparent),
+        var(--surface);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      color: var(--tea-dark);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 36px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(1.55rem, 3vw, 2.6rem);
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 720px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 2;
+    }
+
+    .trait-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag,
+    .skill-pill {
+      border-radius: 999px;
+      border: 1px solid color-mix(in srgb, var(--tea) 35%, var(--line));
+      color: var(--tea-dark);
+      background: color-mix(in srgb, var(--tea) 10%, var(--surface-solid));
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .tag {
+      padding: 11px 15px;
+      font-size: 0.94rem;
+    }
+
+    .hero-cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .stat-card {
+      min-height: 126px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      background: color-mix(in srgb, var(--surface-solid) 76%, transparent);
+      display: grid;
+      align-content: space-between;
+      transition: transform 260ms var(--ease), box-shadow 260ms var(--ease), border-color 260ms var(--ease);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-3px);
+      border-color: color-mix(in srgb, var(--tea) 38%, var(--line));
+      box-shadow: var(--soft-shadow);
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .stat-value {
+      margin-top: 14px;
+      color: var(--ink);
+      font-size: 1.26rem;
+      font-weight: 900;
+      line-height: 1.35;
+    }
+
+    main {
+      padding: 40px clamp(22px, 5vw, 54px) 54px;
+    }
+
+    .section {
+      display: grid;
+      grid-template-columns: minmax(160px, 220px) minmax(0, 1fr);
+      gap: 30px;
+      padding: 38px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section:last-child {
+      border-bottom: 0;
+    }
+
+    .section-title {
+      position: sticky;
+      top: 92px;
+      align-self: start;
+    }
+
+    .section-title h3 {
+      margin: 0;
+      color: var(--sage-dark);
+      font-size: clamp(1.35rem, 2vw, 2rem);
+      letter-spacing: 0;
+    }
+
+    .section-title p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 0.95rem;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 18px;
+    }
+
+    .entry {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      background: color-mix(in srgb, var(--surface-solid) 72%, transparent);
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.22) inset;
+      transition: transform 260ms var(--ease), border-color 260ms var(--ease), box-shadow 260ms var(--ease);
+    }
+
+    .entry:hover {
+      transform: translateY(-3px);
+      border-color: color-mix(in srgb, var(--tea) 38%, var(--line));
+      box-shadow: var(--soft-shadow);
+    }
+
+    .entry-head {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .school-logo {
+      width: 68px;
+      height: 68px;
+      border-radius: 18px;
+      object-fit: contain;
+      padding: 8px;
+      background: var(--cream);
+      border: 1px solid var(--line);
+    }
+
+    .entry time,
+    .time {
+      color: var(--tea-dark);
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .entry h4 {
+      margin: 0;
+      font-size: 1.3rem;
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+
+    .entry-subtitle {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-weight: 700;
+      line-height: 1.65;
+    }
+
+    .entry p {
+      margin: 18px 0 0;
+      color: var(--muted);
+      line-height: 1.95;
+    }
+
+    .experience-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .experience-grid .entry:first-child {
+      grid-column: 1 / -1;
+    }
+
+    .mini-title {
+      margin: 0;
+      color: var(--tea-dark);
+      font-size: 0.82rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .compact-list {
+      display: grid;
+      gap: 10px;
+      margin: 16px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .compact-list li {
+      position: relative;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .compact-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: .75em;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--sage);
+    }
+
+    .skill-layout {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 18px;
+    }
+
+    .skill-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      background: linear-gradient(180deg, color-mix(in srgb, var(--surface-solid) 80%, transparent), color-mix(in srgb, var(--cream) 40%, transparent));
+    }
+
+    .skill-card h4 {
+      margin: 0 0 18px;
+      color: var(--sage-dark);
+      font-size: 1.15rem;
+    }
+
+    .skill-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .skill-pill {
+      padding: 10px 13px;
+      font-size: 0.92rem;
+    }
+
+    .language-card {
+      display: grid;
+      gap: 14px;
+    }
+
+    .language-meter {
+      border-radius: 999px;
+      height: 10px;
+      background: color-mix(in srgb, var(--line) 70%, transparent);
+      overflow: hidden;
+    }
+
+    .language-meter span {
+      display: block;
+      width: 96%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--tea), var(--sage));
+    }
+
+    .content-fade {
+      transition: opacity 220ms var(--ease), transform 220ms var(--ease), filter 220ms var(--ease);
+    }
+
+    .is-switching .content-fade {
+      opacity: 0;
+      transform: translateY(8px);
+      filter: blur(4px);
+    }
+
+    .fade-in {
+      animation: rise 620ms var(--ease) both;
+    }
+
+    .fade-in:nth-child(2) {
+      animation-delay: 80ms;
+    }
+
+    .fade-in:nth-child(3) {
+      animation-delay: 150ms;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 1ms !important;
+        scroll-behavior: auto !important;
+        transition-duration: 1ms !important;
+      }
+    }
+
+    @media (max-width: 880px) {
+      .page {
+        padding: 18px 14px 42px;
+      }
+
+      .topbar {
+        top: 10px;
+        justify-content: center;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-panel {
+        padding: 30px 24px;
+      }
+
+      .portrait-wrap,
+      .portrait {
+        width: 138px;
+        height: 138px;
+      }
+
+      .hero-main {
+        padding: 32px 24px;
+      }
+
+      .hero-cards,
+      .section,
+      .experience-grid,
+      .skill-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title {
+        position: static;
+      }
+
+      .entry-head {
+        grid-template-columns: auto 1fr;
+      }
+
+      .entry time,
+      .time {
+        grid-column: 2;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .topbar {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .control {
+        justify-content: center;
+        width: 100%;
+        padding-inline: 12px;
+      }
+
+      .shell {
+        border-radius: 22px;
+      }
+
+      .profile-panel {
+        text-align: center;
+      }
+
+      .portrait-wrap {
+        margin-inline: auto;
+      }
+
+      .meta-item {
+        justify-content: center;
+      }
+
+      .trait-row {
+        justify-content: center;
+      }
+
+      main {
+        padding: 26px 18px 34px;
+      }
+
+      .section {
+        padding: 30px 0;
+        gap: 18px;
+      }
+
+      .entry {
+        padding: 20px;
+      }
+
+      .entry-head {
+        align-items: start;
+        gap: 14px;
+      }
+
+      .school-logo {
+        width: 56px;
+        height: 56px;
+        border-radius: 15px;
+      }
+    }
+  </style>
+</head>
+<body data-theme="light">
+  <div class="page">
+    <div class="topbar" aria-label="Page controls">
+      <button class="control" id="themeToggle" type="button" aria-pressed="false">
+        <span class="control-mark" aria-hidden="true"></span>
+        <span data-ui="themeLabel">切換深色</span>
+      </button>
+      <button class="control" id="languageToggle" type="button" aria-live="polite">
+        <span class="language-mark" data-ui="languageMark" aria-hidden="true">EN</span>
+        <span data-ui="languageLabel">English</span>
+      </button>
+    </div>
+
+    <div class="shell content-fade">
+      <header class="hero">
+        <aside class="profile-panel">
+          <div class="portrait-wrap fade-in">
+            <img class="portrait" src="assets/profile-photo.png" alt="黃稚淯的大頭貼">
+          </div>
+          <h1 class="name fade-in" data-i18n="name">黃稚淯</h1>
+          <p class="subtitle fade-in" data-i18n="subtitle">亞洲大學心理學系二年級 / 日文檢定 N1</p>
+          <div class="meta-list fade-in">
+            <div class="meta-item">
+              <span class="mini-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+              </span>
+              <span data-i18n="location">台中市, 台灣</span>
+            </div>
+            <div class="meta-item">
+              <span class="mini-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 1 4 16.5v-11Z"></path><path d="M8 7h8M8 11h7"></path></svg>
+              </span>
+              <span data-i18n="focus">心理學 / 日文 / 人際觀察</span>
+            </div>
+          </div>
+        </aside>
+
+        <section class="hero-main" aria-labelledby="traitsTitle">
+          <div class="fade-in">
+            <span class="eyebrow" data-i18n="traitsEyebrow">Profile</span>
+            <h2 id="traitsTitle" data-i18n="traitsTitle">人格特質</h2>
+            <p class="lead" data-i18n="traitsBody">我對人們的互動和心理活動深感興趣，喜歡觀察他們的相處模式和情感交流。喜愛觀察細微之處，並從中獲取深入的理解；對於知識的追求和持續學習是我不懈的追求。保持開放的心態，樂於接受新的觀點和挑戰，對於尋找新穎的解決方案充滿熱情，並且願意適應和應對變化。之前日文多元文化經驗讓我能用更開放的心態面對各種不同的人和想法。</p>
+          </div>
+          <div class="trait-row fade-in" aria-label="Personality tags">
+            <span class="tag" data-i18n="tagCurious">好奇</span>
+            <span class="tag" data-i18n="tagPatient">耐心</span>
+            <span class="tag" data-i18n="tagPeople">對人感興趣</span>
+            <span class="tag" data-i18n="tagThinking">喜歡思考</span>
+          </div>
+          <div class="hero-cards fade-in" aria-label="Highlights">
+            <article class="stat-card">
+              <span class="stat-label" data-i18n="highlightStudy">Current study</span>
+              <strong class="stat-value" data-i18n="highlightStudyValue">亞洲大學心理學系二年級</strong>
+            </article>
+            <article class="stat-card">
+              <span class="stat-label" data-i18n="highlightLanguage">Language</span>
+              <strong class="stat-value" data-i18n="highlightLanguageValue">日文檢定 N1</strong>
+            </article>
+          </div>
+        </section>
+      </header>
+
+      <main>
+        <section class="section" aria-labelledby="educationTitle">
+          <div class="section-title">
+            <h3 id="educationTitle" data-i18n="educationTitle">學歷</h3>
+            <p data-i18n="educationIntro">兩段學習背景連結日文、多元文化與心理學。</p>
+          </div>
+          <div class="timeline">
+            <article class="entry fade-in">
+              <div class="entry-head">
+                <img class="school-logo" src="assets/asia-site-icon.png" alt="亞洲大學校徽">
+                <div>
+                  <h4 data-i18n="asiaSchool">亞洲大學 心理學系</h4>
+                  <p class="entry-subtitle" data-i18n="asiaDetail">二年級</p>
+                </div>
+                <time datetime="2025/2026">2025 - 2026</time>
+              </div>
+            </article>
+
+            <article class="entry fade-in">
+              <div class="entry-head">
+                <img class="school-logo" src="assets/NUTC_logo.gif" alt="國立台中科技大學校徽">
+                <div>
+                  <h4 data-i18n="nutcSchool">國立台中科技大學 日文科</h4>
+                  <p class="entry-subtitle" data-i18n="nutcDetail">五專日文科</p>
+                </div>
+                <time datetime="2020/2025">2020 - 2025</time>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="experienceTitle">
+          <div class="section-title">
+            <h3 id="experienceTitle" data-i18n="experienceTitle">經歷</h3>
+            <p data-i18n="experienceIntro">以人際互動、跨文化學習和校園參與為主軸。</p>
+          </div>
+          <div class="experience-grid">
+            <article class="entry fade-in">
+              <p class="mini-title" data-i18n="expCultureTitle">跨文化日文學習</p>
+              <h4 data-i18n="expCultureHeading">日文線上留學與日本寄宿家庭</h4>
+              <p data-i18n="expCultureBody">曾參加過日文線上留學、日本寄宿家庭。日文線上留學期間，我全身心投入於學習日語及了解日本文化；透過線上課程，學習更道地的日語會話、閱讀和寫作能力，並積極參與課堂討論與小組討論，提升語言技能。日本寄宿家庭的生活讓我有機會深入體驗日本日常生活，透過互動及報告增長交流的勇氣及能力；也積極參與家庭與社區活動，品嚐地道的日本美食。這段經驗豐富了我的人生經驗，滿足了好奇心，也使我更加理解不同的文化。</p>
+            </article>
+
+            <article class="entry fade-in">
+              <p class="mini-title" data-i18n="expCareTitle">助人與心理相關</p>
+              <h4 data-i18n="expCareHeading">團體諮商與輔導中心志工</h4>
+              <ul class="compact-list">
+                <li data-i18n="expCareOne">曾參與團體諮商</li>
+                <li data-i18n="expCareTwo">輔導中心志工</li>
+              </ul>
+            </article>
+
+            <article class="entry fade-in">
+              <p class="mini-title" data-i18n="expCampusTitle">校園參與與班級服務</p>
+              <h4 data-i18n="expCampusHeading">宣傳、行政與同儕協作</h4>
+              <ul class="compact-list">
+                <li data-i18n="expCampusOne">學生會美術宣傳</li>
+                <li data-i18n="expCampusTwo">副班代</li>
+                <li data-i18n="expCampusThree">輔導股長</li>
+              </ul>
+            </article>
+
+            <article class="entry fade-in">
+              <p class="mini-title" data-i18n="workTitle">工作經歷</p>
+              <h4 data-i18n="workRole">餐廳服務員</h4>
+              <p class="entry-subtitle" data-i18n="workDate">Apr 2021 - Apr 2021</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="skillsTitle">
+          <div class="section-title">
+            <h3 id="skillsTitle" data-i18n="skillsTitle">技能與語言</h3>
+            <p data-i18n="skillsIntro">保留原履歷技能，並將語言能力更新為 N1。</p>
+          </div>
+          <div class="skill-layout">
+            <article class="skill-card fade-in">
+              <h4 data-i18n="toolSkills">工具技能</h4>
+              <div class="skill-pills">
+                <span class="skill-pill">Word</span>
+                <span class="skill-pill">Excel</span>
+                <span class="skill-pill">PowerPoint</span>
+                <span class="skill-pill">Canva</span>
+              </div>
+            </article>
+            <article class="skill-card language-card fade-in">
+              <h4 data-i18n="languageAbility">語言能力</h4>
+              <div>
+                <strong class="stat-value" data-i18n="languageValue">日文檢定 N1</strong>
+                <div class="language-meter" aria-hidden="true"><span></span></div>
+              </div>
+              <div class="skill-pills">
+                <span class="skill-pill" data-i18n="certValue">證照: 日文檢定 N1</span>
+                <span class="skill-pill" data-i18n="languageJapanese">Japanese</span>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const translations = {
+      zh: {
+        ui: {
+          themeLight: "切換深色",
+          themeDark: "切換淺色",
+          languageLabel: "English",
+          languageMark: "EN"
+        },
+        name: "黃稚淯",
+        subtitle: "亞洲大學心理學系二年級 / 日文檢定 N1",
+        location: "台中市, 台灣",
+        focus: "心理學 / 日文 / 人際觀察",
+        traitsEyebrow: "Profile",
+        traitsTitle: "人格特質",
+        traitsBody: "我對人們的互動和心理活動深感興趣，喜歡觀察他們的相處模式和情感交流。喜愛觀察細微之處，並從中獲取深入的理解；對於知識的追求和持續學習是我不懈的追求。保持開放的心態，樂於接受新的觀點和挑戰，對於尋找新穎的解決方案充滿熱情，並且願意適應和應對變化。之前日文多元文化經驗讓我能用更開放的心態面對各種不同的人和想法。",
+        tagCurious: "好奇",
+        tagPatient: "耐心",
+        tagPeople: "對人感興趣",
+        tagThinking: "喜歡思考",
+        highlightStudy: "Current study",
+        highlightStudyValue: "亞洲大學心理學系二年級",
+        highlightLanguage: "Language",
+        highlightLanguageValue: "日文檢定 N1",
+        educationTitle: "學歷",
+        educationIntro: "兩段學習背景連結日文、多元文化與心理學。",
+        asiaSchool: "亞洲大學 心理學系",
+        asiaDetail: "二年級",
+        nutcSchool: "國立台中科技大學 日文科",
+        nutcDetail: "五專日文科",
+        experienceTitle: "經歷",
+        experienceIntro: "以人際互動、跨文化學習和校園參與為主軸。",
+        expCultureTitle: "跨文化日文學習",
+        expCultureHeading: "日文線上留學與日本寄宿家庭",
+        expCultureBody: "曾參加過日文線上留學、日本寄宿家庭。日文線上留學期間，我全身心投入於學習日語及了解日本文化；透過線上課程，學習更道地的日語會話、閱讀和寫作能力，並積極參與課堂討論與小組討論，提升語言技能。日本寄宿家庭的生活讓我有機會深入體驗日本日常生活，透過互動及報告增長交流的勇氣及能力；也積極參與家庭與社區活動，品嚐地道的日本美食。這段經驗豐富了我的人生經驗，滿足了好奇心，也使我更加理解不同的文化。",
+        expCareTitle: "助人與心理相關",
+        expCareHeading: "團體諮商與輔導中心志工",
+        expCareOne: "曾參與團體諮商",
+        expCareTwo: "輔導中心志工",
+        expCampusTitle: "校園參與與班級服務",
+        expCampusHeading: "宣傳、行政與同儕協作",
+        expCampusOne: "學生會美術宣傳",
+        expCampusTwo: "副班代",
+        expCampusThree: "輔導股長",
+        workTitle: "工作經歷",
+        workRole: "餐廳服務員",
+        workDate: "Apr 2021 - Apr 2021",
+        skillsTitle: "技能與語言",
+        skillsIntro: "保留原履歷技能，並將語言能力更新為 N1。",
+        toolSkills: "工具技能",
+        languageAbility: "語言能力",
+        languageValue: "日文檢定 N1",
+        certValue: "證照: 日文檢定 N1",
+        languageJapanese: "Japanese"
+      },
+      en: {
+        ui: {
+          themeLight: "Dark mode",
+          themeDark: "Light mode",
+          languageLabel: "日本語",
+          languageMark: "JP"
+        },
+        name: "Huang Chih-Yu",
+        subtitle: "Asia University Psychology, Year 2 / JLPT N1",
+        location: "Taichung, Taiwan",
+        focus: "Psychology / Japanese / People observation",
+        traitsEyebrow: "Profile",
+        traitsTitle: "Personality Traits",
+        traitsBody: "I am deeply interested in how people interact and in the psychological activity behind emotions and relationships. I enjoy observing subtle details and turning them into deeper understanding. I value curiosity, continuous learning, openness to new perspectives, and the ability to adapt to change. My previous multicultural experience in Japanese learning helps me approach different people and ideas with a more open mind.",
+        tagCurious: "Curious",
+        tagPatient: "Patient",
+        tagPeople: "Interested in people",
+        tagThinking: "Reflective",
+        highlightStudy: "Current study",
+        highlightStudyValue: "Asia University Psychology, Year 2",
+        highlightLanguage: "Language",
+        highlightLanguageValue: "JLPT N1",
+        educationTitle: "Education",
+        educationIntro: "A learning path connecting Japanese, cross-cultural experience, and psychology.",
+        asiaSchool: "Asia University, Department of Psychology",
+        asiaDetail: "Second-year student",
+        nutcSchool: "National Taichung University of Science and Technology, Japanese",
+        nutcDetail: "Five-year junior college program",
+        experienceTitle: "Experience",
+        experienceIntro: "Centered on interpersonal understanding, cross-cultural learning, and campus participation.",
+        expCultureTitle: "Cross-cultural Japanese Learning",
+        expCultureHeading: "Online Japanese Study Abroad and Homestay in Japan",
+        expCultureBody: "I participated in an online Japanese study abroad program and a Japanese homestay. During the online program in Hiroshima, I immersed myself in Japanese language learning and cultural understanding. Through online courses, I learned more natural conversation, reading, and writing, and improved my language skills through class discussions and group work with teachers and Japanese students. The homestay experience gave me a chance to experience daily life in Japan, build courage in communication through interaction and reports, join family and community activities, and taste local Japanese food. This experience enriched my life, satisfied my curiosity, and deepened my understanding of different cultures.",
+        expCareTitle: "Helping and Psychology",
+        expCareHeading: "Group Counseling and Counseling Center Volunteer",
+        expCareOne: "Participated in group counseling",
+        expCareTwo: "Counseling center volunteer",
+        expCampusTitle: "Campus Participation and Class Service",
+        expCampusHeading: "Promotion, administration, and peer collaboration",
+        expCampusOne: "Student association art publicity",
+        expCampusTwo: "Vice class representative",
+        expCampusThree: "Counseling affairs leader",
+        workTitle: "Work Experience",
+        workRole: "Restaurant Service Staff",
+        workDate: "Apr 2021 - Apr 2021",
+        skillsTitle: "Skills and Languages",
+        skillsIntro: "Original tool skills retained, with Japanese ability updated to N1.",
+        toolSkills: "Tool Skills",
+        languageAbility: "Language Ability",
+        languageValue: "JLPT N1",
+        certValue: "Certificate: JLPT N1",
+        languageJapanese: "Japanese"
+      },
+      ja: {
+        ui: {
+          themeLight: "ダークへ",
+          themeDark: "ライトへ",
+          languageLabel: "中文",
+          languageMark: "中"
+        },
+        name: "黄稚淯",
+        subtitle: "亜洲大学 心理学科 2年 / 日本語能力試験 N1",
+        location: "台湾・台中市",
+        focus: "心理学 / 日本語 / 対人観察",
+        traitsEyebrow: "Profile",
+        traitsTitle: "人格特性",
+        traitsBody: "人と人との関わりや心理の動きに深い関心があり、相手同士の関係性や感情のやり取りを観察することが好きです。細かな変化に気づき、そこから理解を深めることを大切にしています。知識を求め、学び続ける姿勢を持ち、新しい考え方や挑戦にも開かれた心で向き合います。日本語を通じた多文化経験により、さまざまな人や考えに対してより柔軟で開かれた姿勢を持てるようになりました。",
+        tagCurious: "好奇心",
+        tagPatient: "忍耐強い",
+        tagPeople: "人への関心",
+        tagThinking: "考えることが好き",
+        highlightStudy: "Current study",
+        highlightStudyValue: "亜洲大学 心理学科 2年",
+        highlightLanguage: "Language",
+        highlightLanguageValue: "日本語能力試験 N1",
+        educationTitle: "学歴",
+        educationIntro: "日本語、多文化経験、心理学をつなぐ学びの歩み。",
+        asiaSchool: "亜洲大学 心理学科",
+        asiaDetail: "2年生",
+        nutcSchool: "国立台中科技大学 日本語学科",
+        nutcDetail: "五年制専科",
+        experienceTitle: "経験",
+        experienceIntro: "対人理解、多文化学習、キャンパス活動を中心にした経験。",
+        expCultureTitle: "多文化日本語学習",
+        expCultureHeading: "日本語オンライン留学・日本ホームステイ",
+        expCultureBody: "日本語オンライン留学と日本のホームステイに参加しました。広島のオンライン留学では、日本語学習と日本文化への理解に力を注ぎ、授業を通して自然な会話表現、読解、作文を学びました。授業での討論や先生・日本人学生とのグループ活動にも積極的に参加し、語学力を高めました。日本でのホームステイでは、日常生活を深く体験し、交流や発表を通してコミュニケーションへの勇気と力を伸ばしました。家庭行事や地域活動、日本の食文化にも触れたことで、人生経験が豊かになり、好奇心が満たされ、異文化への理解が深まりました。",
+        expCareTitle: "支援と心理",
+        expCareHeading: "グループカウンセリング・学生相談センターボランティア",
+        expCareOne: "グループカウンセリングに参加",
+        expCareTwo: "学生相談センターのボランティア",
+        expCampusTitle: "キャンパス活動とクラス運営",
+        expCampusHeading: "広報、運営、仲間との協働",
+        expCampusOne: "学生会美術宣伝",
+        expCampusTwo: "副クラス代表",
+        expCampusThree: "輔導係",
+        workTitle: "職務経験",
+        workRole: "レストランスタッフ",
+        workDate: "2021年4月 - 2021年4月",
+        skillsTitle: "スキル・語学",
+        skillsIntro: "元の履歴書のスキルを残し、日本語能力を N1 に更新しました。",
+        toolSkills: "ツールスキル",
+        languageAbility: "語学力",
+        languageValue: "日本語能力試験 N1",
+        certValue: "資格: 日本語能力試験 N1",
+        languageJapanese: "日本語"
+      }
+    };
+
+    const order = ["zh", "en", "ja"];
+    let currentLanguage = "zh";
+    const root = document.documentElement;
+    const body = document.body;
+    const themeToggle = document.querySelector("#themeToggle");
+    const languageToggle = document.querySelector("#languageToggle");
+
+    function updateUiLabels() {
+      const data = translations[currentLanguage].ui;
+      const isDark = body.dataset.theme === "dark";
+      document.querySelector("[data-ui='themeLabel']").textContent = isDark ? data.themeDark : data.themeLight;
+      document.querySelector("[data-ui='languageLabel']").textContent = data.languageLabel;
+      document.querySelector("[data-ui='languageMark']").textContent = data.languageMark;
+      themeToggle.setAttribute("aria-pressed", String(isDark));
+    }
+
+    function setLanguage(language) {
+      currentLanguage = language;
+      root.lang = language === "zh" ? "zh-Hant" : language;
+      const dictionary = translations[language];
+      body.classList.add("is-switching");
+      window.setTimeout(() => {
+        document.querySelectorAll("[data-i18n]").forEach((node) => {
+          const key = node.dataset.i18n;
+          if (dictionary[key]) {
+            node.textContent = dictionary[key];
+          }
+        });
+        updateUiLabels();
+        body.classList.remove("is-switching");
+      }, 180);
+    }
+
+    themeToggle.addEventListener("click", () => {
+      body.dataset.theme = body.dataset.theme === "dark" ? "light" : "dark";
+      updateUiLabels();
+    });
+
+    languageToggle.addEventListener("click", () => {
+      const nextIndex = (order.indexOf(currentLanguage) + 1) % order.length;
+      setLanguage(order[nextIndex]);
+    });
+
+    updateUiLabels();
+  </script>
+</body>
+</html>
