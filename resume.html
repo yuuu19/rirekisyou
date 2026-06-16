@@ -54,6 +54,7 @@
 
     html {
       scroll-behavior: smooth;
+      overflow-x: hidden;
     }
 
     body {
@@ -66,6 +67,7 @@
       color: var(--ink);
       transition: background-color 420ms var(--ease), color 420ms var(--ease);
       text-wrap: pretty;
+      overflow-x: hidden;
     }
 
     body::before {
@@ -107,6 +109,7 @@
     }
 
     .control {
+      min-width: 0;
       min-height: 44px;
       border: 1px solid var(--line);
       border-radius: 999px;
@@ -167,6 +170,8 @@
     }
 
     .shell {
+      width: 100%;
+      min-width: 0;
       border: 1px solid var(--line);
       border-radius: var(--radius-lg);
       background: var(--surface);
@@ -184,6 +189,7 @@
 
     .profile-panel {
       position: relative;
+      min-width: 0;
       padding: 40px;
       color: var(--cream);
       background:
@@ -296,6 +302,7 @@
     }
 
     .hero-main {
+      min-width: 0;
       padding: 52px clamp(28px, 5vw, 62px);
       display: grid;
       align-content: center;
@@ -338,6 +345,7 @@
       color: var(--muted);
       font-size: 1.05rem;
       line-height: 2;
+      overflow-wrap: anywhere;
     }
 
     .trait-row {
@@ -407,6 +415,7 @@
     .section {
       display: grid;
       grid-template-columns: minmax(160px, 220px) minmax(0, 1fr);
+      min-width: 0;
       gap: 30px;
       padding: 38px 0;
       border-bottom: 1px solid var(--line);
@@ -443,6 +452,7 @@
 
     .entry {
       position: relative;
+      min-width: 0;
       border: 1px solid var(--line);
       border-radius: var(--radius-md);
       padding: 24px;
@@ -499,6 +509,7 @@
       margin: 18px 0 0;
       color: var(--muted);
       line-height: 1.95;
+      overflow-wrap: anywhere;
     }
 
     .experience-grid {
@@ -553,6 +564,7 @@
     }
 
     .skill-card {
+      min-width: 0;
       border: 1px solid var(--line);
       border-radius: var(--radius-md);
       padding: 24px;
@@ -691,21 +703,32 @@
     @media (max-width: 540px) {
       .topbar {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 8px;
+        width: calc(100vw - 28px);
+        max-width: calc(100vw - 28px);
+        margin-inline: auto;
       }
 
       .control {
         justify-content: center;
         width: 100%;
-        padding-inline: 12px;
+        gap: 7px;
+        padding-inline: 8px;
+        font-size: 0.92rem;
       }
 
       .shell {
         border-radius: 22px;
+        width: calc(100vw - 28px);
+        max-width: calc(100vw - 28px);
+        margin-inline: auto;
       }
 
       .profile-panel {
         text-align: center;
+        width: 100%;
+        max-width: 100%;
       }
 
       .portrait-wrap {
@@ -714,6 +737,18 @@
 
       .meta-item {
         justify-content: center;
+      }
+
+      .hero-main {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .lead,
+      .entry p,
+      .section-title p {
+        max-width: 100%;
+        word-break: break-word;
       }
 
       .trait-row {
